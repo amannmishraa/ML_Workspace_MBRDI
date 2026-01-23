@@ -1,0 +1,2 @@
+1. Display all delivery person details who got rating >4.5
+2. Display those transactions wherein the order is picked up within 10 mins of placing the order
