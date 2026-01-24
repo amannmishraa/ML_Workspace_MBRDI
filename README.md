@@ -63,5 +63,3 @@ Contributions are welcome! You can help by:
 
 * This repository is purely educational and for practice purposes.
 * All datasets are anonymized and sample data for learning.
-
-```
