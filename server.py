@@ -74,7 +74,7 @@ def get_data():
         return jsonify({
             "columns": df.columns.tolist(),
             "num_rows": len(df),
-            "preview": df.head(10).to_dict(orient="records")
+            "preview": df.head(1000).to_dict(orient="records")
         })
     except Exception as e:
         tb = traceback.format_exc()
