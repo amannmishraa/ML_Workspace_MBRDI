@@ -26,6 +26,7 @@ with st.form("house_form"):
 
     submit = st.form_submit_button("Predict")
 
+
 if submit:
     payload = {
         "Square_Footage": Square_Footage,
@@ -44,7 +45,22 @@ if submit:
         "Distance_To_Center_KM": Distance_To_Center_KM
     }
 
-    res = requests.post("http://localhost:8000/predict", json=payload).json()
+    res = requests.post(
+        "http://localhost:8000/predict",
+        json=payload
+    ).json()
 
+    # 💰 Price output
     st.success(f"💰 Estimated Price: ${res['predicted_price']:,}")
-    st.info("⚡ Likely to sell within a week" if res["sold_within_week"] else "🐢 May take longer to sell")
+
+    # 🧠 Business rule: Poor condition → longer sale time
+    if Condition == "Poor":
+        st.warning(
+            "🐢 Due to poor condition, this house is likely to take longer to sell "
+            "regardless of market demand."
+        )
+    else:
+        if res["sold_within_week"]:
+            st.info("⚡ Likely to sell within a week")
+        else:
+            st.info("🐢 May take longer to sell")
