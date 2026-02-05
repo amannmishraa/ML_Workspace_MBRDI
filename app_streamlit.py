@@ -17,10 +17,8 @@ app_time = st.number_input("Time Spent on App (minutes per day)", min_value=0, v
 discount_usage = st.selectbox("Discount Usage Frequency", ["Low", "Medium", "High"])
 shopping_time = st.selectbox("Preferred Shopping Time", ["Day", "Night"])
 
-# Button to predict
 if st.button("Predict Cluster"):
 
-    # Create customer dict
     customer = {
         "Age": age,
         "Gender": gender,
@@ -34,7 +32,6 @@ if st.button("Predict Cluster"):
         "PreferredShoppingTime": shopping_time
     }
 
-    # Call FastAPI endpoint
     try:
         response = requests.post("http://127.0.0.1:8000/predict", json=customer)
         data = response.json()

@@ -4,7 +4,6 @@ import pandas as pd
 
 app = FastAPI()
 
-# Load saved objects
 kmeans = pickle.load(open("kmeans_model.pkl", "rb"))
 scaler = pickle.load(open("scaler.pkl", "rb"))
 label_encoders = pickle.load(open("label_encoders.pkl", "rb"))
@@ -26,14 +25,11 @@ def predict_cluster(customer: dict):
 
     df = pd.DataFrame([customer])
 
-    # Encode categorical columns
     for col, encoder in label_encoders.items():
         df[col] = encoder.transform(df[col])
 
-    # Scale
     X_scaled = scaler.transform(df)
 
-    # Predict
     cluster = int(kmeans.predict(X_scaled)[0])
 
     return {
